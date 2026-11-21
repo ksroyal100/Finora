@@ -1,0 +1,28 @@
+{
+  "crons": [
+    {
+      "path": "/api/admin/cc/revenue/cron",
+      "schedule": "0 2 * * *"
+    }
+  ],
+  "functions": {
+    "src/app/api/ai-coach/conversations/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/admin/cc/agents/route.ts": {
+      "maxDuration": 120
+    },
+    "src/app/api/admin/cc/workflows/route.ts": {
+      "maxDuration": 300
+    },
+    "src/app/api/admin/cc/agents/voice/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/admin/cc/revenue/cron/route.ts": {
+      "maxDuration": 300
+    },
+    "src/app/api/webhooks/stripe/route.ts": {
+      "maxDuration": 30
+    }
+  }
+}
