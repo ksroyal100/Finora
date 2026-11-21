@@ -7,8 +7,7 @@ import {
   LayoutDashboard, TrendingUp, Target, DollarSign,
   Calculator, Bot, GraduationCap, Users, Search,
   ShoppingBag, BookOpen, Bell, Settings, CreditCard,
-  LogOut, ChevronRight, Menu, X, Wrench, FileDown, Mail, Activity, SlidersHorizontal
-} from 'lucide-react'
+  LogOut, ChevronRight, Menu, X, Wrench, FileDown, Mail, Activity, SlidersHorizontal, StickyNote } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -22,6 +21,7 @@ const NAV_SECTIONS = [
       { href: '/net-worth',   icon: DollarSign,      label: 'Net Worth' },
       { href: '/reports',     icon: FileDown,        label: 'Reports' },
       { href: '/budgeting',   icon: Calculator,      label: 'Budgeting' },
+      { href: '/notes',       icon: StickyNote,      label: 'Notes' },
       { href: '/financial-toolkit', icon: Wrench,    label: 'Financial Toolkit', badge: 'New' },
       { href: '/simulator', icon: SlidersHorizontal, label: 'What-If Simulator', badge: 'New' },
       { href: '/performance', icon: Activity,       label: 'Performance Terminal', badge: 'Live' },

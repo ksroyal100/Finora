@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
+import { prepareNotesForSignOut } from '@/lib/notes/session'
 import { User, Bell, Shield, CreditCard, LogOut, Check, AlertCircle, Camera, Sun, Moon } from 'lucide-react'
 import { PageHeader } from '@/components/shared/PageHeader'
 import { DeleteAccountModal } from '@/components/settings/DeleteAccountModal'
@@ -119,6 +120,10 @@ export default function SettingsPage() {
 
   const handleSignOut = async () => {
     const supabase = createClient()
+    // Notes: sync what is queued, then remove this browser's local copy so the next person can't read it
+    // (kept only if some changes could not be synced, so no unsaved work is destroyed).
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session?.user) await prepareNotesForSignOut(session.user.id)
     await supabase.auth.signOut()
     router.push('/signin')
     router.refresh()

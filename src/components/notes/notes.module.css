@@ -1,0 +1,107 @@
+/* Notes: uses the app's existing CSS variables so it follows light/dark theme automatically. */
+.page { max-width: 1180px; margin: 0 auto; padding: 24px 20px 96px; }
+
+.header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.title { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); margin: 0; display: flex; align-items: center; gap: 10px; }
+.spacer { flex: 1; }
+
+.searchWrap { position: relative; flex: 1 1 260px; max-width: 460px; }
+.search { width: 100%; height: 40px; padding: 0 38px 0 38px; border-radius: var(--radius-md, 12px); border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); font-size: 14px; outline: none; }
+.search:focus { border-color: var(--green-400); box-shadow: 0 0 0 3px color-mix(in srgb, var(--green-400) 22%, transparent); }
+.searchIcon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary); pointer-events: none; }
+.searchClear { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); }
+
+.badge { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 600; color: var(--text-secondary); background: var(--bg-secondary); border: 1px solid var(--border); white-space: nowrap; transition: color .2s, background .2s; }
+.badge[data-state='synced'] { color: var(--green-400); }
+.badge[data-state='syncing'] { color: var(--text-blue, #4fa3ff); }
+.badge[data-state='saved'] { color: var(--text-yellow, #ffd873); }
+.badge[data-state='offline'] { color: var(--text-orange, #ff9f43); }
+.spin { animation: notesSpin 1s linear infinite; }
+@keyframes notesSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+.tab { height: 32px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-size: 13px; font-weight: 600; cursor: pointer; }
+.tab:hover { background: var(--bg-secondary); }
+.tab[aria-pressed='true'] { background: color-mix(in srgb, var(--green-400) 16%, transparent); border-color: var(--green-400); color: var(--green-400); }
+.tabDivider { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
+
+.banner { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: var(--radius-md, 12px); margin-bottom: 14px; font-size: 13px; line-height: 1.5; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-secondary); }
+.banner[data-tone='warn'] { border-color: color-mix(in srgb, var(--text-yellow, #ffd873) 55%, transparent); }
+.banner a { color: var(--green-400); font-weight: 600; }
+
+.iconBtn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; border: none; background: transparent; color: var(--text-secondary); cursor: pointer; }
+.iconBtn:hover, .iconBtn:focus-visible { background: color-mix(in srgb, var(--text-primary) 10%, transparent); color: var(--text-primary); }
+.iconBtn[aria-pressed='true'] { color: var(--green-400); }
+.iconBtn:focus-visible, .tab:focus-visible, .swatch:focus-visible, .chipBtn:focus-visible { outline: 2px solid var(--green-400); outline-offset: 2px; }
+.dangerHover:hover { color: var(--text-red, #ff6b67); }
+
+/* composer */
+.composerWrap { display: flex; justify-content: center; margin-bottom: 26px; }
+.composer { width: 100%; max-width: 600px; border-radius: var(--radius-lg, 16px); border: 1px solid var(--border); background: var(--bg-secondary); box-shadow: var(--shadow-sm); overflow: hidden; }
+.composer[data-color]:not([data-color='default']) { background: var(--note-tint); }
+.composerCollapsed { width: 100%; height: 48px; padding: 0 16px; text-align: left; border: none; background: transparent; color: var(--text-tertiary); font-size: 15px; cursor: text; }
+.field { display: block; width: 100%; border: none; outline: none; background: transparent; color: var(--text-primary); font-family: inherit; resize: none; }
+.fieldTitle { padding: 14px 16px 4px; font-size: 16px; font-weight: 700; }
+.fieldBody { padding: 8px 16px; font-size: 15px; line-height: 1.55; min-height: 72px; }
+.field::placeholder { color: var(--text-tertiary); }
+.toolbar { display: flex; align-items: center; gap: 4px; padding: 6px 8px 8px 10px; flex-wrap: wrap; }
+.closeBtn { height: 32px; padding: 0 14px; border-radius: 8px; border: none; background: transparent; color: var(--text-primary); font-weight: 600; font-size: 13px; cursor: pointer; }
+.closeBtn:hover { background: color-mix(in srgb, var(--text-primary) 10%, transparent); }
+.saveState { font-size: 12px; color: var(--text-tertiary); margin-right: 6px; }
+
+.swatches { display: flex; gap: 6px; flex-wrap: wrap; padding: 4px 8px; }
+.swatch { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--border); background: var(--swatch, transparent); cursor: pointer; padding: 0; }
+.swatch[aria-pressed='true'] { border-color: var(--green-400); box-shadow: 0 0 0 2px color-mix(in srgb, var(--green-400) 30%, transparent); }
+
+/* masonry grid */
+.sectionLabel { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); margin: 20px 4px 10px; }
+.grid { column-width: 240px; column-gap: 14px; }
+.card { break-inside: avoid; margin-bottom: 14px; position: relative; border-radius: var(--radius-lg, 16px); border: 1px solid var(--border); background: var(--bg-secondary); transition: box-shadow .15s; color: var(--text-primary); overflow: hidden; }
+.cardMain { display: block; width: 100%; text-align: left; background: none; border: none; padding: 14px 16px 6px; color: inherit; font: inherit; cursor: pointer; }
+.cardMain:focus-visible { outline: 2px solid var(--green-400); outline-offset: -2px; border-radius: inherit; }
+.card:hover { box-shadow: var(--shadow-md); }
+.card[data-color]:not([data-color='default']), .dialog[data-color]:not([data-color='default']) { background: var(--note-tint); border-color: var(--note-border); }
+.cardTitle { font-weight: 700; font-size: 15px; margin: 0 0 6px; overflow-wrap: anywhere; }
+.cardBody { font-size: 14px; line-height: 1.55; color: var(--text-secondary); white-space: pre-wrap; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 12; -webkit-box-orient: vertical; overflow: hidden; }
+.cardEmpty { font-size: 13px; color: var(--text-tertiary); font-style: italic; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 16px 0; }
+.chip { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--text-primary) 9%, transparent); color: var(--text-secondary); display: inline-flex; align-items: center; gap: 4px; }
+.chipBtn { border: none; cursor: pointer; }
+.chipBtn:hover { background: color-mix(in srgb, var(--text-primary) 16%, transparent); }
+.cardFoot { display: flex; align-items: center; gap: 2px; padding: 6px 8px 8px; min-height: 32px; opacity: 0; transition: opacity .15s; }
+.card:hover .cardFoot, .card:focus-within .cardFoot { opacity: 1; }
+@media (hover: none) { .cardFoot { opacity: 1; } }
+.pendingDot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-yellow, #ffd873); margin-left: auto; margin-right: 6px; flex-shrink: 0; }
+.pendingDot[data-error='true'] { background: var(--text-red, #ff6b67); }
+.archivedTag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-tertiary); margin-bottom: 4px; }
+
+.empty { text-align: center; padding: 64px 16px; color: var(--text-tertiary); }
+.empty h2 { color: var(--text-secondary); font-size: 17px; margin: 12px 0 4px; }
+.skeletonGrid { column-width: 240px; column-gap: 14px; }
+.skeleton { break-inside: avoid; margin-bottom: 14px; border-radius: var(--radius-lg, 16px); background: var(--bg-secondary); border: 1px solid var(--border); }
+
+/* editor dialog */
+.overlay { position: fixed; inset: 0; z-index: 80; background: var(--overlay-mid, rgba(0,0,0,.55)); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.dialog { width: 100%; max-width: 620px; max-height: min(86vh, 760px); display: flex; flex-direction: column; border-radius: var(--radius-lg, 16px); border: 1px solid var(--border); background: var(--bg-secondary); box-shadow: var(--shadow-lg); overflow: hidden; }
+.dialogBody { overflow-y: auto; flex: 1; padding-bottom: 8px; }
+.dialogMeta { font-size: 11px; color: var(--text-tertiary); padding: 0 16px 8px; }
+.labelEditor { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; padding: 4px 16px 10px; }
+.labelInput { flex: 1 1 120px; min-width: 100px; height: 28px; border: none; outline: none; background: transparent; color: var(--text-primary); font-size: 13px; }
+
+/* toasts */
+.toasts { position: fixed; left: 20px; bottom: 20px; z-index: 90; display: flex; flex-direction: column; gap: 10px; max-width: min(420px, calc(100vw - 40px)); }
+.toast { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: var(--radius-md, 12px); background: var(--bg-elevated, #1c1e22); color: var(--text-primary); border: 1px solid var(--border); box-shadow: var(--shadow-lg); font-size: 13px; line-height: 1.45; }
+.toastAction { border: none; background: transparent; color: var(--green-400); font-weight: 700; cursor: pointer; font-size: 13px; padding: 4px 6px; border-radius: 6px; }
+.toastAction:hover { background: color-mix(in srgb, var(--green-400) 14%, transparent); }
+
+/* note colours: a tint over the surface so both themes work. (CSS Modules require a local class in every selector.) */
+.card[data-color='red'], .dialog[data-color='red'], .composer[data-color='red'], .swatch[data-color='red'] { --note-tint: color-mix(in srgb, #ff6b67 16%, var(--bg-secondary)); --note-border: color-mix(in srgb, #ff6b67 45%, transparent); --swatch: #ff6b67; }
+.card[data-color='orange'], .dialog[data-color='orange'], .composer[data-color='orange'], .swatch[data-color='orange'] { --note-tint: color-mix(in srgb, #ff9f43 16%, var(--bg-secondary)); --note-border: color-mix(in srgb, #ff9f43 45%, transparent); --swatch: #ff9f43; }
+.card[data-color='yellow'], .dialog[data-color='yellow'], .composer[data-color='yellow'], .swatch[data-color='yellow'] { --note-tint: color-mix(in srgb, #ffd873 18%, var(--bg-secondary)); --note-border: color-mix(in srgb, #ffd873 45%, transparent); --swatch: #ffd873; }
+.card[data-color='green'], .dialog[data-color='green'], .composer[data-color='green'], .swatch[data-color='green'] { --note-tint: color-mix(in srgb, #2fd968 15%, var(--bg-secondary)); --note-border: color-mix(in srgb, #2fd968 45%, transparent); --swatch: #2fd968; }
+.card[data-color='teal'], .dialog[data-color='teal'], .composer[data-color='teal'], .swatch[data-color='teal'] { --note-tint: color-mix(in srgb, #2ec4b6 16%, var(--bg-secondary)); --note-border: color-mix(in srgb, #2ec4b6 45%, transparent); --swatch: #2ec4b6; }
+.card[data-color='blue'], .dialog[data-color='blue'], .composer[data-color='blue'], .swatch[data-color='blue'] { --note-tint: color-mix(in srgb, #4fa3ff 16%, var(--bg-secondary)); --note-border: color-mix(in srgb, #4fa3ff 45%, transparent); --swatch: #4fa3ff; }
+.card[data-color='purple'], .dialog[data-color='purple'], .composer[data-color='purple'], .swatch[data-color='purple'] { --note-tint: color-mix(in srgb, #a78bfa 16%, var(--bg-secondary)); --note-border: color-mix(in srgb, #a78bfa 45%, transparent); --swatch: #a78bfa; }
+.card[data-color='pink'], .dialog[data-color='pink'], .composer[data-color='pink'], .swatch[data-color='pink'] { --note-tint: color-mix(in srgb, #f472b6 16%, var(--bg-secondary)); --note-border: color-mix(in srgb, #f472b6 45%, transparent); --swatch: #f472b6; }
+.card[data-color='gray'], .dialog[data-color='gray'], .composer[data-color='gray'], .swatch[data-color='gray'] { --note-tint: color-mix(in srgb, #9ca3af 16%, var(--bg-secondary)); --note-border: color-mix(in srgb, #9ca3af 45%, transparent); --swatch: #9ca3af; }

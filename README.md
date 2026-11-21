@@ -17,6 +17,7 @@
 |-----|---------|
 | `docs/OWNERSHIP_AND_ARCHITECTURE.md` | Brand/ownership model, the three components, env & security boundaries |
 | `docs/LEGAL_REVIEW.md` | Status of every legal document and what needs a lawyer |
+| `docs/NOTES_FEATURE.md` | Offline-first Notes: architecture, sync/conflict rules, security, verification |
 | `docs/MOBILE_BACKEND_SUPPORT.md` | Bearer-token support for the Finora Mobile app (what changed, how it was verified) |
 | `docs/SEPARATION_REPORT.md` | What the WealthOS→Finora separation audit found and changed |
 | `docs/SETUP_AND_FEATURES.md`, `docs/TECH_STACK.md` | Setup, features, stack |

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { wipeNotesLocalData } from '@/lib/notes/session'
 import { X, AlertTriangle, Loader2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
@@ -40,6 +41,9 @@ export function DeleteAccountModal({ open, onClose }: DeleteAccountModalProps) {
 
       // Account is gone server-side — clear the local session and leave
       const supabase = createClient()
+      // The account (and its notes) no longer exist server-side: remove the local copy too, without syncing.
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.user) await wipeNotesLocalData(session.user.id)
       await supabase.auth.signOut()
       router.push('/signin')
     } catch {

@@ -4,7 +4,7 @@
 ```bash
 npm install
 cp .env.example .env.local          # fill in at least the REQUIRED lines (Supabase + URLs)
-# Database: run the SQL files in supabase/migrations IN ORDER (001 → 017), either
+# Database: run the SQL files in supabase/migrations IN ORDER (001 → 018), either
 #   • Supabase Dashboard → SQL Editor (paste each file), or
 #   • supabase CLI:  npm run db:migrate
 npm run dev                         # http://localhost:3000
@@ -22,6 +22,8 @@ Then run the separate **Finora Command Center** project (port 3002) with `NEXT_P
 `001_core_schema` → `002` … `014_user_feedback` → **`015_admin_terminal_realtime`** → **`016_rebrand_to_finora`**. 016 brings an existing database to the Finora branding (legal documents, AI prompts, newsletter sender, config); on a fresh install it changes nothing. 015 adds nine low-traffic tables to the Supabase Realtime publication so the admin Command Terminal can update on change instead of polling. It's idempotent and safe to re-run. Without it everything works; the terminal just falls back to a slow poll.
 
 → **`017_complete_legal_documents`** adds the Cookie Policy and Acceptable Use Policy and retitles the Disclaimer / Refund documents. It is additive, idempotent and has a documented rollback. **Back up the database first.**
+
+→ **`018_notes`** adds the offline-first Notes feature (tables, merge functions, RLS). Additive and idempotent; see `NOTES_FEATURE.md`. Tests: `supabase/tests/notes_sync.test.sql`.
 
 ## New in this version
 

@@ -148,13 +148,22 @@ export async function getUserFromRequest(req: NextRequest) {
 }
 
 // ── withAuth ──────────────────────────────────────────────────
+export interface WithAuthOptions {
+  /** Use a separate rate-limit bucket (and limit) instead of the shared 'api' one (60/min per IP).
+   *  For high-frequency, machine-driven endpoints (e.g. notes sync) so they cannot starve the rest of the API. */
+  rateLimit?: { key: string; limit: number }
+}
+
 export function withAuth(
-  handler: (req: NextRequest, ctx: { userId: string; role: UserRole }) => Promise<NextResponse>
+  handler: (req: NextRequest, ctx: { userId: string; role: UserRole }) => Promise<NextResponse>,
+  options: WithAuthOptions = {},
 ) {
   return async (req: NextRequest) => {
     try {
       const ip        = getClientIP(req)
-      const rateLimit = checkRateLimit(ip, 'api')
+      const rateLimit = options.rateLimit
+        ? checkRateLimit(ip, options.rateLimit.key, options.rateLimit.limit)
+        : checkRateLimit(ip, 'api')
       if (!rateLimit.allowed) return apiError('Rate limit exceeded', 429, 'RATE_LIMITED')
 
       const user = await getUserFromRequest(req)

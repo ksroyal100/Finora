@@ -66,3 +66,6 @@
 
 ## Addendum — Finora Mobile (React Native)
 A fourth project, `Finora-Mobile`, now ships alongside Main and Admin. Backend impact (all verified end-to-end, see `MOBILE_BACKEND_SUPPORT.md`): middleware accepts and validates Bearer tokens on API routes; `/api/account/delete` accepts Bearer auth and rate-limits via the service-role client. Main regression tests: 40 passing. Newly found backend issue (unchanged): `PATCH /api/goals` accepts arbitrary fields.
+
+## Addendum — Notes
+Offline-first Notes added (migration 018, `/notes`, `/api/notes/sync`). See `NOTES_FEATURE.md`.

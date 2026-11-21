@@ -21,7 +21,7 @@ const PROTECTED_PAGE_PATHS = [
   '/dashboard', '/portfolio', '/goals', '/net-worth', '/budgeting', '/performance', '/simulator',
   '/ai-coach', '/learning', '/community', '/research',
   '/marketplace/checkout', '/library', '/creator', '/settings',
-  '/billing', '/notifications', '/onboarding',
+  '/billing', '/notifications', '/onboarding', '/notes',
 ]
 
 // ── API ROUTES THAT REQUIRE A LOGGED-IN USER ─────────────────
@@ -33,7 +33,7 @@ const PROTECTED_API_PATHS = [
   '/api/ai-coach', '/api/learning', '/api/community', '/api/research',
   '/api/marketplace/checkout', '/api/notifications', '/api/insights',
   '/api/financial-health', '/api/dashboard', '/api/library',
-  '/api/settings', '/api/onboarding', '/api/analytics',
+  '/api/settings', '/api/onboarding', '/api/analytics', '/api/notes',
 ]
 
 // /api/admin/* (including the founder-only /api/admin/cc/vault) does its

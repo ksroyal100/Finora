@@ -12,6 +12,9 @@ export const API_ROUTES = {
   'GET  /api/auth/callback':       { auth: false,   plan: null,    desc: 'OAuth callback handler' },
   'POST /api/auth/reset-password': { auth: false,   plan: null,    desc: 'Request password reset' },
 
+  // ── NOTES (offline-first sync) ───────────────────────────
+  'POST /api/notes/sync':          { auth: true,    plan: null,    desc: 'Push queued note changes and pull remote changes (idempotent, conflict-safe)' },
+
   // ── PROFILES ─────────────────────────────────────────────
   'GET  /api/profiles':            { auth: true,    plan: null,    desc: 'Get own profile with subscription' },
   'PATCH /api/profiles':           { auth: true,    plan: null,    desc: 'Update own profile' },
